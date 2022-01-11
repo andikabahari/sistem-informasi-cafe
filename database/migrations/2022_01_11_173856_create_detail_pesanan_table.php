@@ -16,13 +16,15 @@ class CreateDetailPesananTable extends Migration
         Schema::create('detail_pesanan', function (Blueprint $table) {
             $table->increments('id_detail_pesanan');
             $table->integer('jumlah');
-            $table->foreignId('id_pesanan')
-                    ->nullable()
+            $table->unsignedInteger('id_pesanan')->nullable();
+            $table->foreign('id_pesanan')
+                    ->references('id_pesanan')->on('pesanan')
                     ->constrained()
                     ->cascadeOnUpdate()
                     ->cascadeOnDelete();
-            $table->foreignId('id_menu')
-                    ->nullable()
+            $table->unsignedInteger('id_menu')->nullable();
+            $table->foreign('id_menu')
+                    ->references('id_menu')->on('menu')
                     ->constrained()
                     ->cascadeOnUpdate()
                     ->cascadeOnDelete();

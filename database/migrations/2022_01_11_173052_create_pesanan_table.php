@@ -17,8 +17,9 @@ class CreatePesananTable extends Migration
             $table->increments('id_pesanan');
             $table->string('nama_pelanggan');
             $table->date('tanggal_pesanan');
-            $table->foreignId('id_pengguna')
-                    ->nullable()
+            $table->unsignedInteger('id_pengguna')->nullable();
+            $table->foreign('id_pengguna')
+                    ->references('id_pengguna')->on('pengguna')
                     ->constrained()
                     ->cascadeOnUpdate()
                     ->nullOnDelete();

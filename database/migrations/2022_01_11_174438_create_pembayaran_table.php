@@ -18,13 +18,15 @@ class CreatePembayaranTable extends Migration
             $table->string('total_harga');
             $table->string('uang_bayar');
             $table->date('uang_kembali');
-            $table->foreignId('id_pengguna')
-                    ->nullable()
+            $table->unsignedInteger('id_pengguna')->nullable();
+            $table->foreign('id_pengguna')
+                    ->references('id_pengguna')->on('pengguna')
                     ->constrained()
                     ->cascadeOnUpdate()
                     ->nullOnDelete();
-            $table->foreignId('id_pesanan')
-                    ->nullable()
+            $table->unsignedInteger('id_pesanan')->nullable();
+            $table->foreign('id_pesanan')
+                    ->references('id_pesanan')->on('pesanan')
                     ->constrained()
                     ->cascadeOnUpdate()
                     ->cascadeOnDelete();
