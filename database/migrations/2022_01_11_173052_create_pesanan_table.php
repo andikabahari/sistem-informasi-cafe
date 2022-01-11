@@ -16,7 +16,6 @@ class CreatePesananTable extends Migration
         Schema::create('pesanan', function (Blueprint $table) {
             $table->increments('id_pesanan');
             $table->string('nama_pelanggan');
-            $table->string('tanggal_pesanan');
             $table->date('tanggal_pesanan');
             $table->foreignId('id_pengguna')
                     ->nullable()
