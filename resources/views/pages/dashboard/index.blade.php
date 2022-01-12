@@ -52,7 +52,7 @@
                 <h4>Grafik Pendapatan</h4>
             </div>
             <div class="card-body">
-            <canvas id="myChart" style="height: 180px"></canvas>
+            <canvas id="myChart" style="max-height: 360px"></canvas>
             </div>
         </div>
         <div class="card">

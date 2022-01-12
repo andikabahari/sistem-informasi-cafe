@@ -9,8 +9,10 @@
             <li class="nav-item"><a href="{{ route('pengguna') }}" class="nav-link nav-link-lg"><div class="d-inline-block">Pengguna</div></a></li>
             <li class="nav-item"><a href="{{ route('pesanan') }}" class="nav-link nav-link-lg"><div class="d-inline-block">Pesanan</div></a></li>
             <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                <div class="d-sm-none d-lg-inline-block">{{ MyAuth::data()->nama_pengguna }}</div></a>
+                <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}" class="rounded-circle mr-1">
+                <div class="d-sm-none d-lg-inline-block"></div></a>
                 <div class="dropdown-menu dropdown-menu-right">
+                    <div class="dropdown-title">{{ MyAuth::data()->nama_pengguna }}</div>
                     <a href="{{ route('akun') }}" class="dropdown-item has-icon">
                         <i class="far fa-user"></i> Akun
                     </a>
