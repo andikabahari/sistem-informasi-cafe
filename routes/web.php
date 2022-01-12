@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PenggunaController;
+use App\Http\Controllers\AkunController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,10 +45,13 @@ Route::middleware(['myauth.user'])->group(function ()
     Route::put('/menu/update', [MenuController::class, 'update'])->name('menu.update');
     Route::delete('/menu/delete', [MenuController::class, 'destroy'])->name('menu.delete');
 
-    Route::get('/pengguna', [MenuController::class, 'index'])->name('pengguna');
-    Route::get('/pengguna/create', [MenuController::class, 'create'])->name('pengguna.create');
-    Route::post('/pengguna/store', [MenuController::class, 'store'])->name('pengguna.store');
-    Route::get('/pengguna/edit', [MenuController::class, 'edit'])->name('pengguna.edit');
-    Route::put('/pengguna/update', [MenuController::class, 'update'])->name('pengguna.update');
-    Route::delete('/pengguna/delete', [MenuController::class, 'destroy'])->name('pengguna.delete');
+    Route::get('/pengguna', [PenggunaController::class, 'index'])->name('pengguna');
+    Route::get('/pengguna/create', [PenggunaController::class, 'create'])->name('pengguna.create');
+    Route::post('/pengguna/store', [PenggunaController::class, 'store'])->name('pengguna.store');
+    Route::get('/pengguna/edit', [PenggunaController::class, 'edit'])->name('pengguna.edit');
+    Route::put('/pengguna/update', [PenggunaController::class, 'update'])->name('pengguna.update');
+    Route::delete('/pengguna/delete', [PenggunaController::class, 'destroy'])->name('pengguna.delete');
+
+    Route::get('/akun', [MenuController::class, 'index'])->name('akun');
+    Route::put('/akun/update', [MenuController::class, 'update'])->name('akun.update');
 });
