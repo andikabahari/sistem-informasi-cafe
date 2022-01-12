@@ -9,7 +9,11 @@ class DetailPesanan extends Model
 {
     use HasFactory;
 
+    protected $table = 'detail_pesanan';
+    
     protected $fillable = [
         'jumlah',
     ];
+
+    public $timestamps = false;
 }

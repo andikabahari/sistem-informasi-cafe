@@ -9,10 +9,14 @@ class Pengguna extends Model
 {
     use HasFactory;
 
+    protected $table = 'pengguna';
+    
     protected $fillable = [
         'nama_pengguna',
         'username',
         'password',
         'jabatan',
     ];
+
+    public $timestamps = false;
 }
