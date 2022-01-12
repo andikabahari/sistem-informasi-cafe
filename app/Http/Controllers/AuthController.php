@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Helpers\MyAuth;
 
-class LogoutController extends Controller
+class AuthController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -15,8 +14,6 @@ class LogoutController extends Controller
      */
     public function __invoke(Request $request)
     {
-        MyAuth::logout();
-
-        return redirect()->route('auth');
+        return view('pages.auth.index');
     }
 }

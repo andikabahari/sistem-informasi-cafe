@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Helpers\MyAuth;
 
 class LoginController extends Controller
 {
@@ -14,6 +15,17 @@ class LoginController extends Controller
      */
     public function __invoke(Request $request)
     {
-        //
+        $username = $request->input('username');
+        $password = $request->input('password');
+
+        if (MyAuth::login($username, $password)) {
+            $request->session()->flash('success_message', 'Login telah berhasil.');
+
+            return redirect()->route('dashboard');
+        } else {
+            $request->session()->flash('error_message', 'Username atau password yang Anda masukkan salah.');
+            
+            return redirect()->route('auth');
+        }
     }
 }
