@@ -7,12 +7,10 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
-                <a href="#">
+                <a href="{{ route('auth') }}">
                     <h4 class="text-center">Cafe {{ config('app.name') }}</h4>
                 </a>
-                <div class="login-brand">
-                    <!-- <img src="#" alt="logo" width="100" class="shadow-light rounded-circle"> -->
-                </div>
+                <div class="login-brand"></div>
                 @include('partials.message')
                 <div class="card card-primary">
                     <div class="card-header">
@@ -39,7 +37,7 @@
                     </div>
                 </div>
                 <div class="simple-footer">
-                    Copyright &copy; <?php echo date('Y'); ?> {{ config('app.name') }}
+                    Copyright &copy; {{ date('Y') }} <div class="bullet"></div> {{ config('app.name') }}
                 </div>
             </div>
         </div>
