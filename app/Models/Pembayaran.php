@@ -10,6 +10,8 @@ class Pembayaran extends Model
     use HasFactory;
 
     protected $table = 'pembayaran';
+
+    protected $primaryKey = 'id_pembayaran';
     
     protected $fillable = [
         'total_harga',
@@ -18,4 +20,9 @@ class Pembayaran extends Model
     ];
 
     public $timestamps = false;
+
+    public function pesanan()
+    {
+        return $this->hasOne(Pesanan::class);
+    }
 }

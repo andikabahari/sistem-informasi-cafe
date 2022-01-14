@@ -15,11 +15,18 @@ class PenggunaSeeder extends Seeder
      */
     public function run()
     {
-        $pengguna = new Pengguna;
-        $pengguna->nama_pengguna = 'Mr. Owner';
-        $pengguna->username = 'owner';
-        $pengguna->password = MyAuth::hash('default');
-        $pengguna->jabatan = 'pemilik';
-        $pengguna->save();
+        Pengguna::create([
+            'nama_pengguna' => 'Bapak Pemilik',
+            'username' => 'pemiik',
+            'password' => MyAuth::hash('default'),
+            'jabatan' => 'pemilik',
+        ]);
+
+        Pengguna::create([
+            'nama_pengguna' => 'Ibu Kasir',
+            'username' => 'kasir',
+            'password' => MyAuth::hash('default'),
+            'jabatan' => 'kasir',
+        ]);
     }
 }

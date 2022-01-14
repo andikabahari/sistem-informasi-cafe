@@ -10,6 +10,8 @@ class Menu extends Model
     use HasFactory;
 
     protected $table = 'menu';
+
+    protected $primaryKey = 'id_menu';
     
     protected $fillable = [
         'nama_menu',
@@ -18,4 +20,9 @@ class Menu extends Model
     ];
 
     public $timestamps = false;
+
+    public function pengguna()
+    {
+        return $this->belongsTo(Pengguna::class);
+    }
 }

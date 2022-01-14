@@ -17,7 +17,7 @@ class CreateMenuTable extends Migration
             $table->increments('id_menu');
             $table->string('nama_menu');
             $table->double('harga');
-            $table->string('gambar');
+            $table->string('gambar')->nullable();
             $table->unsignedInteger('id_pengguna')->nullable();
             $table->foreign('id_pengguna')
                     ->references('id_pengguna')->on('pengguna')

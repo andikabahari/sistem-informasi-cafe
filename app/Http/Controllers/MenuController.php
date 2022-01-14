@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreMenuRequest;
+use App\Http\Requests\UpdateMenuRequest;
+use App\Models\Menu;
+use App\Helpers\MyAuth;
 
 class MenuController extends Controller
-{
+{   
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +17,11 @@ class MenuController extends Controller
      */
     public function index()
     {
-        return view('pages.menu.index');
+        MyAuth::authorize('pemilik');
+
+        $menu = Menu::all();
+
+        return view('pages.menu.index', compact('menu'));
     }
 
     /**
@@ -23,7 +31,9 @@ class MenuController extends Controller
      */
     public function create()
     {
-        //
+        MyAuth::authorize('pemilik');
+
+        return view('pages.menu.create');
     }
 
     /**
@@ -32,20 +42,21 @@ class MenuController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreMenuRequest $request)
     {
-        //
-    }
+        MyAuth::authorize('pemilik');
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $validated = $request->validated();
+
+        Menu::create([
+            'id_pengguna' => $validated['id_pengguna'],
+            'nama_menu' => $validated['nama_menu'],
+            'harga' => $validated['harga'],
+        ]);
+
+        $request->session()->flash('success_message', 'Menu berhasil disimpan!');
+
+        return redirect()->route('menu');
     }
 
     /**
@@ -56,7 +67,11 @@ class MenuController extends Controller
      */
     public function edit($id)
     {
-        //
+        MyAuth::authorize('pemilik');
+
+        $menu = Menu::findOrFail($id);
+
+        return view('pages.menu.edit', compact('menu'));
     }
 
     /**
@@ -66,9 +81,21 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateMenuRequest $request, $id)
     {
-        //
+        MyAuth::authorize('pemilik');
+        
+        $validated = $request->validated();
+
+        Menu::where('id_menu', $id)->update([
+            'id_pengguna' => $validated['id_pengguna'],
+            'nama_menu' => $validated['nama_menu'],
+            'harga' => $validated['harga'],
+        ]);
+
+        $request->session()->flash('success_message', 'Menu berhasil disimpan!');
+
+        return redirect()->route('menu');
     }
 
     /**
@@ -79,6 +106,12 @@ class MenuController extends Controller
      */
     public function destroy($id)
     {
-        //
+        MyAuth::authorize('pemilik');
+
+        Menu::findOrFail($id)->delete();
+
+        $request->session()->flash('success_message', 'Menu berhasil dihapus!');
+
+        return redirect()->route('menu');
     }
 }

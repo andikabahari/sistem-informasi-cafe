@@ -10,6 +10,8 @@ class Pesanan extends Model
     use HasFactory;
     
     protected $table = 'pesanan';
+
+    protected $primaryKey = 'id_pesanan';
     
     protected $fillable = [
         'nama_pelanggan',
@@ -17,4 +19,9 @@ class Pesanan extends Model
     ];
 
     public $timestamps = false;
+
+    public function pengguna()
+    {
+        return $this->belongsTo(Pengguna::class);
+    }
 }
