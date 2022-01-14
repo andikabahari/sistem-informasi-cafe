@@ -21,13 +21,13 @@ use App\Http\Controllers\AkunController;
 |
 */
 
-Route::get('/', AuthController::class)->name('auth')->middleware('myauth.guest');
+Route::get('/', AuthController::class)->name('auth');
 
 Route::post('/login', LoginController::class)->name('login');
 
 Route::get('/logout', LogoutController::class)->name('logout');
 
-Route::middleware(['myauth.user'])->group(function ()
+Route::middleware('myauth')->group(function ()
 {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 

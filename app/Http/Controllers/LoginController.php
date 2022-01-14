@@ -21,7 +21,9 @@ class LoginController extends Controller
         if (MyAuth::login($username, $password)) {
             $request->session()->flash('success_message', 'Login telah berhasil.');
 
-            return redirect()->route('dashboard');
+            return MyAuth::role('pemilik')
+                    ? redirect()->route('dashboard')
+                    : redirect()->route('pesanan');
         } else {
             $request->session()->flash('error_message', 'Username atau password yang Anda masukkan salah.');
             

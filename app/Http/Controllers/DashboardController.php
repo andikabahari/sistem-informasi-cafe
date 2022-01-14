@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Helpers\MyAuth;
 
 class DashboardController extends Controller
 {
@@ -14,6 +15,8 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request)
     {
+        MyAuth::authorize('pemilik');
+
         return view('pages.dashboard.index');
     }
 }

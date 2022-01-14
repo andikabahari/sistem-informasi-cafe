@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use App\Helpers\MyAuth;
 
-class RedirectIfNotAuthenticated
+class Authenticate
 {
     /**
      * Handle an incoming request.

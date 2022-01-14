@@ -9,6 +9,7 @@ class MyAuth
 {
     private static $table = 'pengguna';
     private static $primary = 'id_pengguna';
+    private static $role = 'jabatan';
     private static $passwordAlgo = PASSWORD_DEFAULT;
     private static $passwordOption = [
         'cost' => 10
@@ -27,6 +28,13 @@ class MyAuth
     public static function check()
     {
         return ! empty(self::data());
+    }
+
+    public static function authorize($role)
+    {
+        if (self::data()->{self::$role} !== $role) {
+            abort(403);
+        }
     }
 
     public static function login($username, $password)
