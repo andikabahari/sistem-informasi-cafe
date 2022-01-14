@@ -1,4 +1,9 @@
 @charset "UTF-8";
+
+.dropdown-toggle::after {
+    display: none;
+}
+
 /**
  * Stisla
  *
@@ -11,6 +16,7 @@
  * @url 	https://getstisla.com
  *
  */
+ 
 /**
  * TABLE OF CONTENTS
  *
@@ -1748,7 +1754,15 @@ h6 .badge {
     .navbar .dropdown-menu {
       position: absolute; }
     .navbar .navbar-nav {
-      flex-direction: row; }
+        width: 100%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-radius: 4px;
+        background-color: #fff;
+      flex-direction: col; }
+    .navbar .navbar-nav .nav-link {
+        color: #191d21;
+        flex-direction: col; }
   .navbar-expand-lg .navbar-nav .dropdown-menu-right {
     right: 0;
     left: auto; } }
