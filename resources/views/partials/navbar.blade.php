@@ -13,10 +13,8 @@
                 <li class="nav-item"><a href="{{ route('pengguna') }}" class="nav-link nav-link-lg"><div class="d-inline-block">Pengguna</div></a></li>
                 <li class="nav-item"><a href="{{ route('pesanan') }}" class="nav-link nav-link-lg"><div class="d-inline-block">Pesanan</div></a></li>
                 <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                    <!-- <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}" class="rounded-circle mr-1"> -->
                     <div class="d-lg-inline-block"><span class="mr-1">{{ MyAuth::data()->nama_pengguna }}</span> <i class="fa fa-caret-down" style="line-height: 1"></i></div></a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <!-- <div class="dropdown-title">{{ MyAuth::data()->nama_pengguna }}</div> -->
                         <a href="{{ route('akun') }}" class="dropdown-item has-icon">
                             <i class="far fa-user"></i> Akun
                         </a>
