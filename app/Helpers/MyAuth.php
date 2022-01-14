@@ -30,9 +30,14 @@ class MyAuth
         return ! empty(self::data());
     }
 
+    public static function role($role)
+    {
+        return self::data()->{self::$role} === $role;
+    }
+
     public static function authorize($role)
     {
-        if (self::data()->{self::$role} !== $role) {
+        if ( ! self::role($role)) {
             abort(403);
         }
     }

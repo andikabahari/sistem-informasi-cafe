@@ -8,10 +8,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav navbar-right ml-auto">
-                <li class="nav-item"><a href="{{ route('dashboard') }}" class="nav-link nav-link-lg"><div class="d-inline-block">Dashboard</div></a></li>
-                <li class="nav-item"><a href="{{ route('menu') }}" class="nav-link nav-link-lg"><div class="d-inline-block">Menu</div></a></li>
-                <li class="nav-item"><a href="{{ route('pengguna') }}" class="nav-link nav-link-lg"><div class="d-inline-block">Pengguna</div></a></li>
-                <li class="nav-item"><a href="{{ route('pesanan') }}" class="nav-link nav-link-lg"><div class="d-inline-block">Pesanan</div></a></li>
+                @if (MyAuth::role('pemilik'))
+                    <li class="nav-item"><a href="{{ route('dashboard') }}" class="nav-link nav-link-lg"><div class="d-inline-block">Dashboard</div></a></li>
+                    <li class="nav-item"><a href="{{ route('menu') }}" class="nav-link nav-link-lg"><div class="d-inline-block">Menu</div></a></li>
+                    <li class="nav-item"><a href="{{ route('pengguna') }}" class="nav-link nav-link-lg"><div class="d-inline-block">Pengguna</div></a></li>
+                @else
+                    <li class="nav-item"><a href="{{ route('pesanan') }}" class="nav-link nav-link-lg"><div class="d-inline-block">Pesanan</div></a></li>
+                @endif
                 <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                     <div class="d-lg-inline-block"><span class="mr-1">{{ MyAuth::data()->nama_pengguna }}</span> <i class="fa fa-caret-down" style="line-height: 1"></i></div></a>
                     <div class="dropdown-menu dropdown-menu-right">
