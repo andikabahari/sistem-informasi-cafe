@@ -22,24 +22,48 @@ class DashboardController extends Controller
         MyAuth::authorize('pemilik');
 
         $jumlahMenu = Menu::count();
+
         $jumlahPesanan = DB::table('pesanan')
-                ->select(DB::raw('COUNT(id_pesanan) as jumlah_pesanan'))
                 ->where(DB::raw('YEAR(tanggal_pesanan)'), '=',  date('Y'))
                 ->where(DB::raw('MONTH(tanggal_pesanan)'), '=',  date('m'))
-                ->count();
-        // $pendapatan = DB::table('pesanan')
-        //         ->join(DB::raw('pembayaran', 'pembayaran.id_pembayaran', '=', 'pesanan.id_pesanan'))
-        //         ->select(DB::raw('SUM(tunai) as pendapatan'))
-        //         ->where(DB::raw('YEAR(tanggal_pesanan)'), '=',  date('Y'))
-        //         ->where(DB::raw('MONTH(tanggal_pesanan)'), '=',  date('m'))
-        //         ->get();
-        
-        //         dd($pendapatan);
+                ->count('id_pesanan');
+
+        $totalPendapatan = DB::table('pembayaran')
+                ->join('pesanan', 'pembayaran.id_pesanan', '=', 'pesanan.id_pesanan')
+                ->where(DB::raw('YEAR(tanggal_pesanan)'), '=',  date('Y'))
+                ->where(DB::raw('MONTH(tanggal_pesanan)'), '=',  date('m'))
+                ->sum('tunai');
+
+        $grafikPendapatan = DB::table('pembayaran')
+                ->join('pesanan', 'pembayaran.id_pesanan', '=', 'pesanan.id_pesanan')
+                ->where(DB::raw('YEAR(tanggal_pesanan)'), '=',  date('Y'))
+                ->where(DB::raw('MONTH(tanggal_pesanan)'), '=',  date('m'))
+                ->groupBy(DB::raw('pekan'))
+                ->select(DB::raw('
+                    WEEK(tanggal_pesanan) as pekan,
+                    SUM(tunai) as pendapatan
+                '))
+                ->get();
+
+        $tabelPendapatan = DB::table('pembayaran')
+                ->join('pesanan', 'pembayaran.id_pesanan', '=', 'pesanan.id_pesanan')
+                ->where(DB::raw('YEAR(tanggal_pesanan)'), '=',  date('Y'))
+                ->where(DB::raw('MONTH(tanggal_pesanan)'), '=',  date('m'))
+                ->groupBy(DB::raw('pekan'))
+                ->select(DB::raw('
+                    DATE_FORMAT(tanggal_pesanan, "%b, %Y") as periode,
+                    WEEK(tanggal_pesanan) as pekan,
+                    COUNT(pembayaran.id_pesanan) as pesanan,
+                    SUM(tunai) as pendapatan
+                '))
+                ->get();
 
         return view('pages.dashboard.index', compact(
             'jumlahMenu',
             'jumlahPesanan',
-            // 'pendapatan',
+            'totalPendapatan',
+            'grafikPendapatan',
+            'tabelPendapatan',
         ));
     }
 }
