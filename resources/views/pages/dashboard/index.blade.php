@@ -10,7 +10,7 @@
             <div class="col-lg-4 col-md-4 col-12">
                 <div class="card card-statistic-1">
                     <div class="card-icon bg-primary">
-                        <i class="fas fa-wallet"></i>
+                        <i class="fas fa-coffee"></i>
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
@@ -23,7 +23,7 @@
             <div class="col-lg-4 col-md-4 col-12">
                 <div class="card card-statistic-1">
                     <div class="card-icon bg-danger">
-                        <i class="fas fa-utensils"></i>
+                        <i class="fas fa-shopping-cart"></i>
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
@@ -36,11 +36,11 @@
             <div class="col-lg-4 col-md-4 col-12">
                 <div class="card card-statistic-1">
                     <div class="card-icon bg-warning">
-                        <i class="fas fa-users"></i>
+                        <i class="fas fa-suitcase"></i>
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
-                            <h4>Jumlah Pendapatan</h4>
+                            <h4>Pendapatan</h4>
                         </div>
                         <div class="card-body">0</div>
                     </div>

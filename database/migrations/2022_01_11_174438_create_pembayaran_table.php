@@ -15,9 +15,9 @@ class CreatePembayaranTable extends Migration
     {
         Schema::create('pembayaran', function (Blueprint $table) {
             $table->increments('id_pembayaran');
-            $table->string('total_harga');
-            $table->string('uang_bayar');
-            $table->date('uang_kembali');
+            $table->double('total');
+            $table->double('tunai');
+            $table->double('kembali');
             $table->unsignedInteger('id_pengguna')->nullable();
             $table->foreign('id_pengguna')
                     ->references('id_pengguna')->on('pengguna')

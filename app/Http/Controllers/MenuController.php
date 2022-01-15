@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreMenuRequest;
 use App\Http\Requests\UpdateMenuRequest;
 use App\Models\Menu;
+use App\Models\Pengguna;
 use App\Helpers\MyAuth;
 
 class MenuController extends Controller
@@ -48,7 +49,7 @@ class MenuController extends Controller
 
         $validated = $request->validated();
 
-        Menu::create([
+        $menu = Menu::create([
             'id_pengguna' => $validated['id_pengguna'],
             'nama_menu' => $validated['nama_menu'],
             'harga' => $validated['harga'],

@@ -15,7 +15,7 @@ class CreateDetailPesananTable extends Migration
     {
         Schema::create('detail_pesanan', function (Blueprint $table) {
             $table->increments('id_detail_pesanan');
-            $table->integer('jumlah');
+            $table->integer('banyak');
             $table->unsignedInteger('id_pesanan')->nullable();
             $table->foreign('id_pesanan')
                     ->references('id_pesanan')->on('pesanan')

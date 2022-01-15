@@ -14,15 +14,12 @@ class Pembayaran extends Model
     protected $primaryKey = 'id_pembayaran';
     
     protected $fillable = [
-        'total_harga',
-        'uang_bayar',
-        'uang_kembali',
+        'id_pesanan',
+        'id_pengguna',
+        'total',
+        'tunai',
+        'kembali',
     ];
 
     public $timestamps = false;
-
-    public function pesanan()
-    {
-        return $this->hasOne(Pesanan::class);
-    }
 }

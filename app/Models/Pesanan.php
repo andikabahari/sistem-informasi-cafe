@@ -14,14 +14,10 @@ class Pesanan extends Model
     protected $primaryKey = 'id_pesanan';
     
     protected $fillable = [
+        'id_pengguna',
         'nama_pelanggan',
         'tanggal_pesanan',
     ];
 
     public $timestamps = false;
-
-    public function pengguna()
-    {
-        return $this->belongsTo(Pengguna::class);
-    }
 }

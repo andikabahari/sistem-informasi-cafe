@@ -14,15 +14,11 @@ class Menu extends Model
     protected $primaryKey = 'id_menu';
     
     protected $fillable = [
+        'id_pengguna',
         'nama_menu',
         'harga',
         'gambar',
     ];
 
     public $timestamps = false;
-
-    public function pengguna()
-    {
-        return $this->belongsTo(Pengguna::class);
-    }
 }
