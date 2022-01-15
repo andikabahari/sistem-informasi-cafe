@@ -10,10 +10,9 @@
             <div class="card-header">
                 <h4>@yield('title')</h4>
             </div>
-            <form action="{{ route('pengguna.update', $pengguna->id_pengguna) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('pengguna.update', $pengguna->id_pengguna) }}" method="post">
                 @method('PUT')
                 @csrf
-                <input type="hidden" name="id_pengguna" value="{{ \App\Helpers\MyAuth::id() }}">
                 <div class="card-body">
                     <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Pengguna</label>
@@ -49,16 +48,44 @@
                         </div>
                     </div>
                     <div class="form-group row mb-4">
+                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Konfirmasi Password</label>
+                        <div class="col-sm-12 col-md-7">
+                            <input type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror">
+                            @error('password_confirmation')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Jabatan</label>
                         <div class="col-sm-12 col-md-7">
-                            <select name="jabatan" class="form-control @error('jabatan') is-invalid @enderror" value="{{ old('jabatan') ?? $pengguna->jabatan }}">
-                            @if ($pengguna->jabatan == 'pemilik')    
-                                <option value=pemilik selected>Pemilik</option>
-                                <option value=kasir>Kasir</option>
-                            @else
-                                <option value=pemilik>Pemilik</option>
-                                <option value=kasir selected>Kasir</option>
-                            @endif
+                            <select name="jabatan" class="form-control @error('jabatan') is-invalid @enderror">
+                                <option value="">&mdash; Pilih &mdash;</option>
+                                @if (old('jabatan'))
+                                    <option value="pemilik"
+                                        @if (old('jabatan') == 'pemilik')
+                                            selected
+                                        @endif
+                                        >Pemilik</option>
+                                    <option value="kasir"
+                                        @if (old('jabatan') == 'kasir')
+                                            selected
+                                        @endif
+                                        >Kasir</option>
+                                @else
+                                    <option value="pemilik"
+                                        @if ($pengguna->jabatan == 'pemilik')
+                                            selected
+                                        @endif
+                                        >Pemilik</option>
+                                    <option value="kasir"
+                                        @if ($pengguna->jabatan == 'kasir')
+                                            selected
+                                        @endif
+                                        >Kasir</option>
+                                @endif
                             </select>
                             @error('jabatan')
                                 <span class="invalid-feedback" role="alert">
@@ -66,6 +93,7 @@
                                 </span>
                             @enderror
                         </div>
+                    </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Simpan</button>
                     <button type="reset" class="btn btn-danger">Reset</button>

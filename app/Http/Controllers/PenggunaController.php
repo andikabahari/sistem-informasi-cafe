@@ -51,11 +51,11 @@ class PenggunaController extends Controller
         Pengguna::create([
             'nama_pengguna' => $validated['nama_pengguna'],
             'username' => $validated['username'],
-            'password' => $validated['password'],
+            'password' => MyAuth::hash($validated['password']),
             'jabatan' => $validated['jabatan'],
         ]);
 
-        $request->session()->flash('success_message', 'Menu berhasil disimpan!');
+        $request->session()->flash('success_message', 'Pengguna berhasil disimpan!');
 
         return redirect()->route('pengguna');
     }
@@ -92,7 +92,7 @@ class PenggunaController extends Controller
         Pengguna::where('id_pengguna', $id)->update([
             'nama_pengguna' => $validated['nama_pengguna'],
             'username' => $validated['username'],
-            'password' => $validated['password'],
+            'password' => MyAuth::hash($validated['password']),
             'jabatan' => $validated['jabatan'],
         ]);
 

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StorePenggunaRequest extends FormRequest
 {
@@ -24,11 +25,10 @@ class StorePenggunaRequest extends FormRequest
     public function rules()
     {
         return [
-            'id_pengguna' => 'nullable|integer',
             'nama_pengguna' => 'required|string|max:100',
-            'username' => 'required|string',
-            'password' => 'required|string',
-            'jabatan' => 'required|string',
+            'username' => 'required|string|max:15|unique:pengguna',
+            'password' => 'required|string|min:6|confirmed',
+            'jabatan' => 'required|in:pemilik,kasir',
         ];
     }
 }
