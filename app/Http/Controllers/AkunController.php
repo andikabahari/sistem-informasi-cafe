@@ -19,8 +19,7 @@ class AkunController extends Controller
     {
         $akun = MyAuth::data();
 
-        return view('pages.akun.index',compact('akun'));
-
+        return view('pages.akun.index', compact('akun'));
     }
 
     /**
@@ -32,14 +31,15 @@ class AkunController extends Controller
      */
     public function update(UpdateAkunRequest $request)
     {
-        $id = MyAuth::id();
         $validated = $request->validated();
-
-        Pengguna::where('id_pengguna', $id)->update([
+        
+        $akun = MyAuth::data();
+        
+        Pengguna::where('id_pengguna', $akun->id_pengguna)->update([
             'nama_pengguna' => $validated['nama_pengguna'],
             'username' => $validated['username'],
-            'password' => $validated['password'],
-            'jabatan' => $validated['jabatan'],
+            'password' => MyAuth::hash($validated['password']),
+            'jabatan' => $akun->jabatan,
         ]);
 
         $request->session()->flash('success_message', 'Akun berhasil disimpan!');

@@ -39,7 +39,7 @@
                     <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Password</label>
                         <div class="col-sm-12 col-md-7">
-                            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') ?? $akun->password }}">
+                            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror">
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -48,23 +48,17 @@
                         </div>
                     </div>
                     <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Jabatan</label>
+                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Konfirmasi Password</label>
                         <div class="col-sm-12 col-md-7">
-                            <select name="jabatan" class="form-control @error('jabatan') is-invalid @enderror">
-                            @if ($akun->jabatan == 'pemilik')    
-                                <option value=pemilik selected>Pemilik</option>
-                                <option value=kasir>Kasir</option>
-                            @else
-                                <option value=pemilik>Pemilik</option>
-                                <option value=kasir selected>Kasir</option>
-                            @endif
-                            </select>
-                            @error('jabatan')
+                            <input type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror">
+                            @error('password_confirmation')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
+                    </div>
+                </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Simpan</button>
                     <button type="reset" class="btn btn-danger">Reset</button>
