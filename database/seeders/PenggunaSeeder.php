@@ -17,7 +17,7 @@ class PenggunaSeeder extends Seeder
     {
         Pengguna::create([
             'nama_pengguna' => 'Bapak Pemilik',
-            'username' => 'pemiik',
+            'username' => 'pemilik',
             'password' => MyAuth::hash('default'),
             'jabatan' => 'pemilik',
         ]);
