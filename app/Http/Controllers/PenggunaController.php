@@ -17,7 +17,11 @@ class PenggunaController extends Controller
      */
     public function index()
     {
-        return view('pages.pengguna.index');
+        MyAuth::authorize('pemilik');
+
+        $pengguna = Pengguna::all();
+
+        return view('pages.pengguna.index',compact('pengguna'));
     }
 
     /**
@@ -27,7 +31,9 @@ class PenggunaController extends Controller
      */
     public function create()
     {
-        //
+        MyAuth::authorize('pemilik');
+
+        return view('pages.pengguna.create');
     }
 
     /**
@@ -38,19 +44,22 @@ class PenggunaController extends Controller
      */
     public function store(StorePenggunaRequest $request)
     {
-        //
+        MyAuth::authorize('pemilik');
+
+        $validated = $request->validated();
+
+        Pengguna::create([
+            'nama_pengguna' => $validated['nama_pengguna'],
+            'username' => $validated['username'],
+            'password' => $validated['password'],
+            'jabatan' => $validated['jabatan'],
+        ]);
+
+        $request->session()->flash('success_message', 'Menu berhasil disimpan!');
+
+        return redirect()->route('pengguna');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -60,7 +69,11 @@ class PenggunaController extends Controller
      */
     public function edit($id)
     {
-        //
+        MyAuth::authorize('pemilik');
+
+        $pengguna = Pengguna::findOrFail($id);
+
+        return view('pages.pengguna.edit', compact('pengguna'));
     }
 
     /**
@@ -72,7 +85,20 @@ class PenggunaController extends Controller
      */
     public function update(UpdatePenggunaRequest $request, $id)
     {
-        //
+        MyAuth::authorize('pemilik');
+        
+        $validated = $request->validated();
+
+        Pengguna::where('id_pengguna', $id)->update([
+            'nama_pengguna' => $validated['nama_pengguna'],
+            'username' => $validated['username'],
+            'password' => $validated['password'],
+            'jabatan' => $validated['jabatan'],
+        ]);
+
+        $request->session()->flash('success_message', 'Pengguna berhasil disimpan!');
+
+        return redirect()->route('pengguna');
     }
 
     /**
@@ -83,6 +109,12 @@ class PenggunaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        MyAuth::authorize('pemilik');
+
+        Pengguna::findOrFail($id)->delete();
+
+        // $request->session()->flash('success_message', 'Pengguna berhasil dihapus!');
+
+        return redirect()->route('pengguna');
     }
 }

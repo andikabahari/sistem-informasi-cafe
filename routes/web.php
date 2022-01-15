@@ -52,6 +52,6 @@ Route::middleware('myauth')->group(function ()
     Route::put('/pengguna/{id}', [PenggunaController::class, 'update'])->name('pengguna.update');
     Route::delete('/pengguna/{id}', [PenggunaController::class, 'destroy'])->name('pengguna.delete');
 
-    Route::get('/akun', [PenggunaController::class, 'index'])->name('akun');
-    Route::post('/akun', [PenggunaController::class, 'update'])->name('akun.update');
+    Route::get('/akun', [AkunController::class, 'index'])->name('akun');
+    Route::post('/akun', [AkunController::class, 'update'])->name('akun.update');
 });

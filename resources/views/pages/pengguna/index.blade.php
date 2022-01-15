@@ -10,7 +10,7 @@
             <div class="card-header">
                 <h4>Daftar @yield('title')</h4>
                 <div class="card-header-action">
-                    <a href="{{ route('menu.create') }}" class="btn btn-primary">
+                    <a href="{{ route('pengguna.create') }}" class="btn btn-primary">
                         <i class="fas fa-plus mr-1"></i> Tambah
                     </a>
                 </div>
@@ -26,7 +26,25 @@
                             <th>Aksi</th>
                         </thead>
                         <tbody>
-                            
+                            @php
+                                $no = 1
+                            @endphp
+                            @foreach ($pengguna as $data)
+                                <tr>
+                                    <td>{{ $no++ }}</td>
+                                    <td>{{ $data->nama_pengguna }}</td>
+                                    <td>{{ $data->username }}</td>
+                                    <td>{{ $data->jabatan }}</td>
+                                    <td>
+                                        <a href="{{ route('pengguna.edit', $data->id_pengguna) }}" class="btn btn-success">Edit</a>
+                                        <form class="d-inline-block" action="{{ route('pengguna.delete', $data->id_pengguna) }}" method="post">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button class="btn btn-danger" type="submit">Hapus</a>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

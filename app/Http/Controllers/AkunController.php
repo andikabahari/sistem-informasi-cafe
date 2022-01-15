@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Helpers\MyAuth;
+use App\Http\Requests\UpdateAkunRequest;
+use App\Models\Pengguna;
+
 
 class AkunController extends Controller
 {
@@ -13,7 +17,10 @@ class AkunController extends Controller
      */
     public function index()
     {
-        //
+        $akun = MyAuth::data();
+
+        return view('pages.akun.index',compact('akun'));
+
     }
 
     /**
@@ -23,8 +30,20 @@ class AkunController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateAkunRequest $request)
     {
-        //
+        $id = MyAuth::id();
+        $validated = $request->validated();
+
+        Pengguna::where('id_pengguna', $id)->update([
+            'nama_pengguna' => $validated['nama_pengguna'],
+            'username' => $validated['username'],
+            'password' => $validated['password'],
+            'jabatan' => $validated['jabatan'],
+        ]);
+
+        $request->session()->flash('success_message', 'Akun berhasil disimpan!');
+
+        return redirect()->route('akun');
     }
 }
