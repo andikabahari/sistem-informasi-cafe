@@ -6,6 +6,7 @@
 <section class="section">
     <div class="section-body">
         <h2 class="section-title">Dashboard &mdash; {{ date('M, Y') }}</h2>
+        @include('partials.message')
         <div class="row">
             <div class="col-lg-4 col-md-4 col-12">
                 <div class="card card-statistic-1">

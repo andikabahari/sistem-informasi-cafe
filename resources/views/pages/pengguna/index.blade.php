@@ -6,6 +6,7 @@
 <section class="section">
     <div class="section-body">
         <h2 class="section-title">Pengguna</h2>
+        @include('partials.message')
         <div class="card">
             <div class="card-header">
                 <h4>@yield('title')</h4>
@@ -15,7 +16,6 @@
                     </a>
                 </div>
             </div>
-            @include('partials.message')
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-stripped table-bordered">

@@ -6,6 +6,7 @@
 <section class="section">
     <div class="section-body">
         <h2 class="section-title">Pesanan</h2>
+        @include('partials.message')
         <div class="card">
             <div class="card-header">
                 <h4>@yield('title')</h4>
