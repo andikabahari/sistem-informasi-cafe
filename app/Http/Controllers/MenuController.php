@@ -110,7 +110,7 @@ class MenuController extends Controller
 
         Menu::findOrFail($id)->delete();
 
-        $request->session()->flash('success_message', 'Menu berhasil dihapus!');
+        // $request->session()->flash('success_message', 'Menu berhasil dihapus!');
 
         return redirect()->route('menu');
     }

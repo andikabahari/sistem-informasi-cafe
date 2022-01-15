@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StorePenggunaRequest;
+use App\Http\Requests\UpdatePenggunaRequest;
+use App\Models\Pengguna;
+use App\Helpers\MyAuth;
 
 class PenggunaController extends Controller
 {
@@ -32,7 +36,7 @@ class PenggunaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePenggunaRequest $request)
     {
         //
     }
@@ -66,7 +70,7 @@ class PenggunaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdatePenggunaRequest $request, $id)
     {
         //
     }
