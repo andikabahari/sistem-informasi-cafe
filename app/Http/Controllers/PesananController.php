@@ -20,6 +20,8 @@ class PesananController extends Controller
      */
     public function index()
     {
+        MyAuth::authorize('kasir');
+
         $menu = Menu::all();
 
         return view('pages.pesanan.index', compact('menu'));
@@ -32,9 +34,11 @@ class PesananController extends Controller
      */
     public function riwayat()
     {
-        $pesanan = Pesanan::all();
+        MyAuth::authorize('kasir');
 
-        
+        $pesanan = DB::table('pembayaran')
+                ->join('pesanan', 'pembayaran.id_pesanan', '=', 'pesanan.id_pesanan')
+                ->get();
 
         return view('pages.pesanan.riwayat', compact('pesanan')); 
     }

@@ -4,13 +4,13 @@
 
 @section('content')
 <section class="section">
-    <div class="section-body">>
+    <div class="section-body">
         @include('partials.message')
         <div class="card mx-auto mt-5" style="max-width: 480px">
             <form action="{{ route('pesanan') }}" method="post">
                 <div id="print">
                     <div class="card-body">
-                        <h4 class="text-center mt-3">DILEUBEUT</h4>
+                        <h4 class="text-center text-uppercase mt-3">{{ config('app.name') }}</h4>
                         <hr>
                         <div class="row">
                             <div class="col">

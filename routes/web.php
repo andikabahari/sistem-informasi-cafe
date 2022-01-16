@@ -9,6 +9,8 @@ use App\Http\Controllers\PesananController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\AkunController;
+use App\Http\Controllers\RiwayatController;
+use App\Http\Controllers\StrukController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,8 +38,10 @@ Route::middleware('myauth')->group(function ()
     Route::post('/pesanan', [PesananController::class, 'store'])->name('pesanan.store');
     Route::put('/pesanan/{id}', [PesananController::class, 'update'])->name('pesanan.update');
     Route::delete('/pesanan/{id}', [PesananController::class, 'destroy'])->name('pesanan.delete');
-    Route::get('/pesanan/riwayat', [PesananController::class, 'riwayat'])->name('pesanan.riwayat');
-    Route::get('/pesanan/struk/{id}', [PesananController::class, 'struk'])->name('pesanan.struk');
+
+    Route::get('/riwayat', RiwayatController::class)->name('riwayat');
+
+    Route::get('/struk/{id}', StrukController::class)->name('struk');
 
     Route::get('/menu', [MenuController::class, 'index'])->name('menu');
     Route::get('/menu/create', [MenuController::class, 'create'])->name('menu.create');

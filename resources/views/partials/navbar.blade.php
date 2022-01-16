@@ -13,7 +13,7 @@
                     <li class="nav-item"><a href="{{ route('pengguna') }}" class="nav-link nav-link-lg"><div class="d-inline-block @if (preg_match('/pengguna/', Route::currentRouteName())) font-weight-bold @endif">Pengguna</div></a></li>
                     @else
                     <li class="nav-item"><a href="{{ route('pesanan') }}" class="nav-link nav-link-lg"><div class="d-inline-block @if (preg_match('/pesanan/', Route::currentRouteName())) font-weight-bold @endif">Pesanan</div></a></li>
-                    <li class="nav-item"><a href="{{ route('pesanan.riwayat') }}" class="nav-link nav-link-lg"><div class="d-inline-block @if (preg_match('/riwayat/', Route::currentRouteName())) font-weight-bold @endif">Riwayat Pesanan</div></a></li>
+                    <li class="nav-item"><a href="{{ route('riwayat') }}" class="nav-link nav-link-lg"><div class="d-inline-block @if (preg_match('/riwayat/', Route::currentRouteName())) font-weight-bold @endif">Riwayat Pesanan</div></a></li>
                 @endif
                 <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg ">
                     <div class="d-lg-inline-block"><span class="mr-1">{{ \App\Helpers\MyAuth::data()->nama_pengguna }}</span> <i class="fa fa-caret-down" style="line-height: 1; font-size: 0.75rem"></i></div></a>
