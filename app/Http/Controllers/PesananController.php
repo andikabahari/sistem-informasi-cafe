@@ -31,7 +31,11 @@ class PesananController extends Controller
      */
     public function riwayat()
     {
-        // 
+        $pesanan = Pesanan::all();
+
+        
+
+        return view('pages.pesanan.riwayat', compact('pesanan')); 
     }
 
     /**
