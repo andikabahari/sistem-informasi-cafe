@@ -4,10 +4,9 @@
 
 @section('content')
 <section class="section">
-    <div class="section-body">
-        <h2 class="section-title">Riwayat Pesanan</h2>
+    <div class="section-body">>
         @include('partials.message')
-        <div class="card mx-auto" style="max-width: 480px">
+        <div class="card mx-auto mt-5" style="max-width: 480px">
             <form action="{{ route('pesanan') }}" method="post">
                 <div id="print">
                     <div class="card-body">

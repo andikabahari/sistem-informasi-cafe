@@ -101,7 +101,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-primary">Bayar</button>
                     <button type="reset" class="btn btn-danger">Reset</button>
                 </div>
             </form>
