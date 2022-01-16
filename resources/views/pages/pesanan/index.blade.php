@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Tambah Pesanan')
+@section('title', 'Pesanan Baru')
 
 @section('content')
 <section class="section">
@@ -17,11 +17,25 @@
                 <div class="card-body">
                     <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Pelanggan</label>
-                        <div class="col-sm-12 col-md-7"><input type="text" name="nama_pelanggan" class="form-control"></div>
+                        <div class="col-sm-12 col-md-7">
+                            <input type="text" name="nama_pelanggan" class="form-control @error('nama_pelanggan') is-invalid @enderror" value="{{ old('nama_pelanggan') }}">
+                            @error('nama_pelanggan')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                     </div>
                     <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tanggal Pesanan</label>
-                        <div class="col-sm-12 col-md-7"><input type="date" name="tanggal_pesanan" class="form-control" value="{{ date('Y-m-d') }}"></div>
+                        <div class="col-sm-12 col-md-7">
+                            <input type="date" name="tanggal_pesanan" class="form-control @error('tanggal_pesanan') is-invalid @enderror" value="{{ old('tanggal_pesanan') ?? date('Y-m-d') }}">
+                            @error('tanggal_pesanan')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                     </div>
                     <div class="table-responsive">
                         <table class="table">
@@ -32,9 +46,12 @@
                                 <th width="300">Jumlah</th>
                             </tr>
                             <tbody>
+                                @php
+                                    $i = 0
+                                @endphp
                                 @foreach ($menu as $data)
                                     <tr>
-                                        <td><input class="form-control" type="text" name="banyak[]" value="0" style="width: 60px"></td>
+                                        <td><input class="form-control" type="text" name="banyak[]" value="{{ old('banyak.'.$i) ?? 0 }}" style="width: 60px"></td>
                                         <td>
                                             {{ $data->nama_menu }}
                                             <input type="hidden" name="id_menu[]" value="{{ $data->id_menu }}">
@@ -48,6 +65,9 @@
                                             <input type="hidden" name="jumlah[]" value="0" readonly>
                                         </td>
                                     <tr>
+                                    @php
+                                        $i++
+                                    @endphp
                                 @endforeach
                             </tbody>
                             <tfoot>
@@ -60,7 +80,14 @@
                                 </tr>
                                 <tr>
                                     <td colspan="3" class="text-right"><b>Tunai</b></td>
-                                    <td><input class="form-control" type="text" name="tunai" style="width: 200px"></td>
+                                    <td>
+                                        <input class="form-control @error('tunai') is-invalid @enderror" type="text" name="tunai" style="width: 200px" value="{{ old('tunai') }}">
+                                        @error('tunai')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td colspan="3" class="text-right"><b>Kembali</b></td>
@@ -107,6 +134,8 @@
         var tmpTotal = 0;
 
         for (var i = 0; i < banyak.length; i++) {
+            if (isNaN(banyak[i].value))
+                banyak[i].value = 0;
             tmpJumlah = parseFloat(banyak[i].value) * parseFloat(harga[i].value);
             jumlah[i].value = tmpJumlah;
             document.getElementsByClassName("jumlah")[i].innerHTML = jumlah[i].value;

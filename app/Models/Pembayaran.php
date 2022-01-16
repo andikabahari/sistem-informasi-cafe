@@ -22,9 +22,4 @@ class Pembayaran extends Model
     ];
 
     public $timestamps = false;
-
-    public function pesanan()
-    {
-        return $this->hasOne(Pembayaran::class, 'id_pesanan', 'id_pembayaran');
-    }
 }

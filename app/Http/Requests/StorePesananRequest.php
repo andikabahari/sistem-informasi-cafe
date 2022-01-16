@@ -24,12 +24,14 @@ class StorePesananRequest extends FormRequest
     public function rules()
     {
         return [
-            'id_pengguna' => '',
-            'nama_pelanggan' => '',
-            'tanggal_pesanan' => '',
-            'total' => '',
-            'tunai' => '',
-            'kembali' => '',
+            'id_pengguna' => 'nullable|integer',
+            'nama_pelanggan' => 'required|string|max:100',
+            'tanggal_pesanan' => 'required|date',
+            'banyak' => 'required|array',
+            'banyak.*' => 'nullable|integer',
+            'total' => 'required|numeric',
+            'tunai' => 'required|numeric',
+            'kembali' => 'required|numeric',
         ];
     }
 }
