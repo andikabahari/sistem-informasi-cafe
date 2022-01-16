@@ -21,40 +21,52 @@ class DashboardController extends Controller
     {
         MyAuth::authorize('pemilik');
 
+        $strdate = $request->input('periode');
+        if (preg_match('/\d{4}-\d{1,2}/', $strdate)) {
+            $date = date_create($strdate);
+            $tahun = date_format($date, 'Y');
+            $bulan = date_format($date, 'm');
+        } else {
+            $tahun = date('Y');
+            $bulan = date('m');
+        }
+
+        $periode = sprintf('%s-%s', $tahun, $bulan);
+
         $jumlahMenu = Menu::count();
 
         $jumlahPesanan = DB::table('pesanan')
-                ->where(DB::raw('YEAR(tanggal_pesanan)'), '=',  date('Y'))
-                ->where(DB::raw('MONTH(tanggal_pesanan)'), '=',  date('m'))
+                ->where(DB::raw('YEAR(tanggal_pesanan)'), '=',  $tahun)
+                ->where(DB::raw('MONTH(tanggal_pesanan)'), '=',  $bulan)
                 ->count('id_pesanan');
 
         $totalPendapatan = DB::table('pembayaran')
                 ->join('pesanan', 'pembayaran.id_pesanan', '=', 'pesanan.id_pesanan')
-                ->where(DB::raw('YEAR(tanggal_pesanan)'), '=',  date('Y'))
-                ->where(DB::raw('MONTH(tanggal_pesanan)'), '=',  date('m'))
-                ->sum('tunai');
+                ->where(DB::raw('YEAR(tanggal_pesanan)'), '=',  $tahun)
+                ->where(DB::raw('MONTH(tanggal_pesanan)'), '=',  $bulan)
+                ->sum('total');
 
         $grafikPendapatan = DB::table('pembayaran')
                 ->join('pesanan', 'pembayaran.id_pesanan', '=', 'pesanan.id_pesanan')
-                ->where(DB::raw('YEAR(tanggal_pesanan)'), '=',  date('Y'))
-                ->where(DB::raw('MONTH(tanggal_pesanan)'), '=',  date('m'))
+                ->where(DB::raw('YEAR(tanggal_pesanan)'), '=',  $tahun)
+                ->where(DB::raw('MONTH(tanggal_pesanan)'), '=',  $bulan)
                 ->groupBy(DB::raw('pekan'))
                 ->select(DB::raw('
                     WEEK(tanggal_pesanan) as pekan,
-                    SUM(tunai) as pendapatan
+                    SUM(total) as pendapatan
                 '))
                 ->get();
 
         $tabelPendapatan = DB::table('pembayaran')
                 ->join('pesanan', 'pembayaran.id_pesanan', '=', 'pesanan.id_pesanan')
-                ->where(DB::raw('YEAR(tanggal_pesanan)'), '=',  date('Y'))
-                ->where(DB::raw('MONTH(tanggal_pesanan)'), '=',  date('m'))
+                ->where(DB::raw('YEAR(tanggal_pesanan)'), '=',  $tahun)
+                ->where(DB::raw('MONTH(tanggal_pesanan)'), '=',  $bulan)
                 ->groupBy(DB::raw('pekan'))
                 ->select(DB::raw('
                     DATE_FORMAT(tanggal_pesanan, "%b, %Y") as periode,
                     WEEK(tanggal_pesanan) as pekan,
                     COUNT(pembayaran.id_pesanan) as pesanan,
-                    SUM(tunai) as pendapatan
+                    SUM(total) as pendapatan
                 '))
                 ->get();
 
@@ -64,6 +76,9 @@ class DashboardController extends Controller
             'totalPendapatan',
             'grafikPendapatan',
             'tabelPendapatan',
+            'periode',
+            'tahun',
+            'bulan',
         ));
     }
 }
