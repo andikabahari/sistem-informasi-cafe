@@ -25,6 +25,27 @@ class PesananController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function riwayat()
+    {
+        // 
+    }
+
+    /**
+     * Show details.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function struk($id)
+    {
+        // 
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

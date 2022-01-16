@@ -34,9 +34,10 @@ Route::middleware('myauth')->group(function ()
     Route::get('/pesanan', [PesananController::class, 'index'])->name('pesanan');
     Route::get('/pesanan/create', [PesananController::class, 'create'])->name('pesanan.create');
     Route::post('/pesanan', [PesananController::class, 'store'])->name('pesanan.store');
-    Route::get('/pesanan/{id}', [PesananController::class, 'edit'])->name('pesanan.edit');
     Route::put('/pesanan/{id}', [PesananController::class, 'update'])->name('pesanan.update');
     Route::delete('/pesanan/{id}', [PesananController::class, 'destroy'])->name('pesanan.delete');
+    Route::get('/pesanan/riwayat', [PesananController::class, 'riwayat'])->name('pesanan.riwayat');
+    Route::get('/pesanan/struk/{id}', [PesananController::class, 'struk'])->name('pesanan.struk');
 
     Route::get('/menu', [MenuController::class, 'index'])->name('menu');
     Route::get('/menu/create', [MenuController::class, 'create'])->name('menu.create');
