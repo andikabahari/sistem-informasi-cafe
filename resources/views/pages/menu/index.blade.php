@@ -24,6 +24,7 @@
                             <th>Gambar</th>
                             <th>Nama Menu</th>
                             <th>Harga</th>
+                            <th>Aktif</th>
                             <th>Aksi</th>
                         </thead>
                         <tbody>
@@ -36,13 +37,16 @@
                                     <td>{{ $data->gambar }}</td>
                                     <td>{{ $data->nama_menu }}</td>
                                     <td>{{ $data->harga }}</td>
+                                    <td>{!! $data->aktif > 0 ? '<span class="badge badge-info">Ya</span>' : '<span class="badge badge-warning">Tidak</span>' !!}</td>
                                     <td>
                                         <a href="{{ route('menu.edit', $data->id_menu) }}" class="btn btn-success">Edit</a>
-                                        <form class="d-inline-block" action="{{ route('menu.delete', $data->id_menu) }}" method="post">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button class="btn btn-danger" type="submit">Hapus</a>
-                                        </form>
+                                        @if (DB::table('detail_pesanan')->where('id_menu', $data->id_menu)->doesntExist())
+                                            <form class="d-inline-block" action="{{ route('menu.delete', $data->id_menu) }}" method="post">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button class="btn btn-danger" type="submit">Hapus</a>
+                                            </form>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

@@ -27,6 +27,7 @@ class UpdateMenuRequest extends FormRequest
             'id_pengguna' => 'nullable|integer',
             'nama_menu' => 'required|string|max:100',
             'harga' => 'required|numeric',
+            'aktif' => 'nullable|boolean',
         ];
     }
 }

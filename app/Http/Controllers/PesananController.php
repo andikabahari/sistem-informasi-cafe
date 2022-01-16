@@ -22,7 +22,7 @@ class PesananController extends Controller
     {
         MyAuth::authorize('kasir');
 
-        $menu = Menu::all();
+        $menu = Menu::where('aktif', true)->get();
 
         return view('pages.pesanan.index', compact('menu'));
     }

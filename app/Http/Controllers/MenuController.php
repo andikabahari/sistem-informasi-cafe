@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreMenuRequest;
 use App\Http\Requests\UpdateMenuRequest;
 use App\Models\Menu;
+use App\Models\DetailPesanan;
 use App\Models\Pengguna;
 use App\Helpers\MyAuth;
 
@@ -53,6 +54,7 @@ class MenuController extends Controller
             'id_pengguna' => $validated['id_pengguna'],
             'nama_menu' => $validated['nama_menu'],
             'harga' => $validated['harga'],
+            'aktif' => $validated['aktif'],
         ]);
 
         $request->session()->flash('success_message', 'Menu berhasil disimpan!');
@@ -92,6 +94,7 @@ class MenuController extends Controller
             'id_pengguna' => $validated['id_pengguna'],
             'nama_menu' => $validated['nama_menu'],
             'harga' => $validated['harga'],
+            'aktif' => $validated['aktif'],
         ]);
 
         $request->session()->flash('success_message', 'Menu berhasil disimpan!');
@@ -109,7 +112,9 @@ class MenuController extends Controller
     {
         MyAuth::authorize('pemilik');
 
-        Menu::findOrFail($id)->delete();
+        if (DetailPesanan::where('id_menu', $id)->doesntExist()) {
+            Menu::findOrFail($id)->delete();
+        }
 
         // $request->session()->flash('success_message', 'Menu berhasil dihapus!');
 
