@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreMenuRequest;
 use App\Http\Requests\UpdateMenuRequest;
 use App\Models\Menu;
@@ -50,12 +51,11 @@ class MenuController extends Controller
 
         $validated = $request->validated();
 
-        $menu = Menu::create([
-            'id_pengguna' => $validated['id_pengguna'],
-            'nama_menu' => $validated['nama_menu'],
-            'harga' => $validated['harga'],
-            'aktif' => $validated['aktif'],
-        ]);
+        if ($request->file('gambar')) {
+            $validated['gambar'] = $request->file('gambar')->store('uploads');
+        }
+
+        Menu::create($validated);
 
         $request->session()->flash('success_message', 'Menu berhasil disimpan!');
 
@@ -90,12 +90,15 @@ class MenuController extends Controller
         
         $validated = $request->validated();
 
-        Menu::where('id_menu', $id)->update([
-            'id_pengguna' => $validated['id_pengguna'],
-            'nama_menu' => $validated['nama_menu'],
-            'harga' => $validated['harga'],
-            'aktif' => $validated['aktif'],
-        ]);
+        if ($request->file('gambar')) {
+            if ($request->input('old_gambar')) {
+                Storage::delete($request->input('old_gambar'));
+            }
+            
+            $validated['gambar'] = $request->file('gambar')->store('uploads');
+        }
+
+        Menu::where('id_menu', $id)->update($validated);
 
         $request->session()->flash('success_message', 'Menu berhasil disimpan!');
 
@@ -113,7 +116,13 @@ class MenuController extends Controller
         MyAuth::authorize('pemilik');
 
         if (DetailPesanan::where('id_menu', $id)->doesntExist()) {
-            Menu::findOrFail($id)->delete();
+            $menu = Menu::findOrFail($id);
+
+            if ($menu->gambar) {
+                Storage::delete($menu->gambar);
+            }
+
+            $menu->delete();
         }
 
         // $request->session()->flash('success_message', 'Menu berhasil dihapus!');

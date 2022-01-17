@@ -53,7 +53,14 @@
                                     <tr>
                                         <td><input class="form-control" type="text" name="banyak[]" value="{{ old('banyak.'.$i) ?? 0 }}" style="width: 60px"></td>
                                         <td>
-                                            {{ $data->nama_menu }}
+                                            @if ($data->gambar)
+                                                <img id="gambar" class="mt-3" src="{{ asset('storage/'.$data->gambar) }}" alt="{{ $data->nama_menu }}" style="width: 80px; height: 80px">
+                                            @else
+                                                <img id="gambar" class="mt-3" src="holder.js/80x80/?text=Gambar">
+                                            @endif
+                                            <div>
+                                                {{ $data->nama_menu }}
+                                            </div>
                                             <input type="hidden" name="id_menu[]" value="{{ $data->id_menu }}">
                                         </td>
                                         <td>

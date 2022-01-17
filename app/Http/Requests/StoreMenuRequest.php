@@ -28,6 +28,7 @@ class StoreMenuRequest extends FormRequest
             'nama_menu' => 'required|string|max:100',
             'harga' => 'required|numeric',
             'aktif' => 'nullable|boolean',
+            'gambar' => 'nullable|image|file|max:1024',
         ];
     }
 }

@@ -21,7 +21,7 @@
                     <table class="table table-stripped table-bordered">
                         <thead>
                             <th>#</th>
-                            <th>Gambar</th>
+                            <th width="170">Gambar</th>
                             <th>Nama Menu</th>
                             <th>Harga</th>
                             <th>Aktif</th>
@@ -34,19 +34,27 @@
                             @foreach ($menu as $data)
                                 <tr>
                                     <td>{{ $no++ }}</td>
-                                    <td>{{ $data->gambar }}</td>
+                                    <td>
+                                        @if ($data->gambar)
+                                            <img class="m-2" src="{{ asset('storage/'.$data->gambar) }}" alt="{{ $data->nama_menu }}" style="width: 100px; height: 100px">
+                                        @else
+                                            <img class="m-2" src="holder.js/100x100/?text=Gambar">
+                                        @endif
+                                    </td>
                                     <td>{{ $data->nama_menu }}</td>
-                                    <td>{{ $data->harga }}</td>
+                                    <td>Rp{{ $data->harga }}</td>
                                     <td>{!! $data->aktif > 0 ? '<span class="badge badge-info">Ya</span>' : '<span class="badge badge-warning">Tidak</span>' !!}</td>
                                     <td>
-                                        <a href="{{ route('menu.edit', $data->id_menu) }}" class="btn btn-success">Edit</a>
-                                        @if (DB::table('detail_pesanan')->where('id_menu', $data->id_menu)->doesntExist())
-                                            <form class="d-inline-block" action="{{ route('menu.delete', $data->id_menu) }}" method="post">
-                                                @method('DELETE')
-                                                @csrf
-                                                <button class="btn btn-danger" type="submit">Hapus</a>
-                                            </form>
-                                        @endif
+                                        <div style="width: 125px">
+                                            <a href="{{ route('menu.edit', $data->id_menu) }}" class="btn btn-success">Edit</a>
+                                            @if (DB::table('detail_pesanan')->where('id_menu', $data->id_menu)->doesntExist())
+                                                <form class="d-inline-block" action="{{ route('menu.delete', $data->id_menu) }}" method="post">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <button class="btn btn-danger" type="submit">Hapus</a>
+                                                </form>
+                                            @endif
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
