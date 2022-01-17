@@ -19,23 +19,33 @@
                     <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Menu</label>
                         <div class="col-sm-12 col-md-7">
-                            <input type="text" name="nama_menu" class="form-control @error('nama_menu') is-invalid @enderror" value="{{ old('nama_menu') ?? $menu->nama_menu }}">
-                            @error('nama_menu')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            @if (DB::table('detail_pesanan')->where('id_menu', $menu->id_menu)->exists())
+                                <input type="text" class="form-control" value="{{ $menu->nama_menu }}" readonly>
+                                <input type="hidden" name="nama_menu" value="{{ $menu->nama_menu }}">
+                            @else
+                                <input type="text" name="nama_menu" class="form-control @error('nama_menu') is-invalid @enderror" value="{{ old('nama_menu') ?? $menu->nama_menu }}">
+                                @error('nama_menu')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            @endif
                         </div>
                     </div>
                     <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Harga</label>
                         <div class="col-sm-12 col-md-7">
-                            <input type="text" name="harga" class="form-control @error('harga') is-invalid @enderror" value="{{ old('harga') ?? $menu->harga }}">
-                            @error('harga')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            @if (DB::table('detail_pesanan')->where('id_menu', $menu->id_menu)->exists())
+                                <input type="text" class="form-control" value="{{ $menu->harga }}" readonly>
+                                <input type="hidden" name="harga" value="{{ $menu->harga }}">
+                            @else
+                                <input type="text" name="harga" class="form-control @error('harga') is-invalid @enderror" value="{{ old('harga') ?? $menu->harga }}">
+                                @error('harga')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            @endif
                         </div>
                     </div>
                     <div class="form-group row mb-4">
