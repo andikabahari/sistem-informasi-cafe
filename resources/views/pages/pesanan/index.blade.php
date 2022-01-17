@@ -39,44 +39,50 @@
                     </div>
                     <div class="table-responsive">
                         <table class="table">
-                            <tr>
-                                <th>Banyak</th>
-                                <th>Nama Menu</th>
-                                <th width="300">Harga</th>
-                                <th width="300">Jumlah</th>
-                            </tr>
-                            <tbody>
-                                @php
-                                    $i = 0
-                                @endphp
-                                @foreach ($menu as $data)
-                                    <tr>
-                                        <td><input class="form-control" type="text" name="banyak[]" value="{{ old('banyak.'.$i) ?? 0 }}" style="width: 60px"></td>
-                                        <td>
-                                            @if ($data->gambar)
-                                                <img id="gambar" class="mt-3" src="{{ asset('storage/'.$data->gambar) }}" alt="{{ $data->nama_menu }}" style="width: 80px; height: 80px">
-                                            @else
-                                                <img id="gambar" class="mt-3" src="holder.js/80x80/?text=Gambar">
-                                            @endif
-                                            <div>
-                                                {{ $data->nama_menu }}
-                                            </div>
-                                            <input type="hidden" name="id_menu[]" value="{{ $data->id_menu }}">
-                                        </td>
-                                        <td>
-                                            Rp{{ $data->harga }}
-                                            <input type="hidden" name="harga[]" value="{{ $data->harga }}">
-                                        </td>
-                                        <td>
-                                            Rp<span class="jumlah">0</span>
-                                            <input type="hidden" name="jumlah[]" value="0" readonly>
-                                        </td>
-                                    <tr>
+                            <thead>
+                                <tr>
+                                    <th>Menu</th>
+                                    <th>Banyak</th>
+                                    <th width="300">Harga</th>
+                                    <th width="300">Jumlah</th>
+                                </tr>
+                            </thead>
+                            <div style="max-height: 500px; overflow-y: scroll">
+                                <tbody>
                                     @php
-                                        $i++
+                                        $i = 0
                                     @endphp
-                                @endforeach
-                            </tbody>
+                                    @foreach ($menu as $data)
+                                        <tr class="border-bottom">
+                                            <td>
+                                                <div class="card my-3" style="width: 100px;">
+                                                    @if ($data->gambar)
+                                                        <img class="card-img-top" src="{{ asset('storage/'.$data->gambar) }}" alt="{{ $data->nama_menu }}" style="width: 100px; height: 100px">
+                                                    @else
+                                                        <img class="card-img-top" src="holder.js/100x100/?text=Gambar">
+                                                    @endif
+                                                    <div class="card-body p-0 px-2 py-2">
+                                                        <p class="card-text" style="line-height: 1.5">{{ $data->nama_menu }}</p>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="id_menu[]" value="{{ $data->id_menu }}">
+                                            </td>
+                                            <td><input class="form-control" type="text" name="banyak[]" value="{{ old('banyak.'.$i) ?? 0 }}" style="width: 60px"></td>
+                                            <td>
+                                                Rp{{ $data->harga }}
+                                                <input type="hidden" name="harga[]" value="{{ $data->harga }}">
+                                            </td>
+                                            <td>
+                                                Rp<span class="jumlah">0</span>
+                                                <input type="hidden" name="jumlah[]" value="0" readonly>
+                                            </td>
+                                        <tr>
+                                        @php
+                                            $i++
+                                        @endphp
+                                    @endforeach
+                                </tbody>
+                            </div>
                             <tfoot>
                                 <tr>
                                     <td colspan="3" class="text-right"><b>Total</b></td>
