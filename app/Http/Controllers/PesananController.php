@@ -32,6 +32,48 @@ class PesananController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function cartList()
+    {
+        MyAuth::authorize('kasir');
+
+        $cartItems = \Cart::getContent();
+
+        return view('pages.pesanan.cart', compact('cartItems'));
+    }
+
+    public function addToCart(Request $request)
+    {
+        MyAuth::authorize('kasir');
+
+        \Cart::add([
+            'id' => $request->id,
+            'name' => $request->name,
+            'price' => $request->price,
+            'quantity' => $request->quantity,
+            'attributes' => ['image' => $request->image],
+        ]);
+
+        session()->flash('success_message', 'Menu berhasil disimpan ke keranjang!');
+
+        return redirect()->route('pesanan');
+    }
+
+    public function removeCart($id)
+    {
+        MyAuth::authorize('kasir');
+
+        \Cart::remove($id);
+
+        session()->flash('success', 'Menu berhasil dihapus dari keranjang!');
+
+        return redirect()->route('pesanan.cart');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function riwayat()
     {
         MyAuth::authorize('kasir');
@@ -115,6 +157,8 @@ class PesananController extends Controller
             'tunai' => $validated['tunai'],
             'kembali' => $validated['kembali'],
         ]);
+
+        \Cart::clear();
 
         $request->session()->flash('success_message', 'Pesanan berhasil disimpan!');
 

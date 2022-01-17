@@ -38,6 +38,10 @@ Route::middleware('myauth')->group(function ()
     Route::post('/pesanan', [PesananController::class, 'store'])->name('pesanan.store');
     Route::put('/pesanan/{id}', [PesananController::class, 'update'])->name('pesanan.update');
     Route::delete('/pesanan/{id}', [PesananController::class, 'destroy'])->name('pesanan.delete');
+    
+    Route::get('/pesanan/cart', [PesananController::class, 'cartList'])->name('pesanan.cart');
+    Route::post('/pesanan/cart', [PesananController::class, 'addToCart'])->name('pesanan.cart.store');
+    Route::get('/pesanan/cart/{id}', [PesananController::class, 'removeCart'])->name('pesanan.cart.remove');
 
     Route::get('/riwayat', RiwayatController::class)->name('riwayat');
 
