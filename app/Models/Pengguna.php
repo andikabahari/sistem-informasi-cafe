@@ -16,6 +16,7 @@ class Pengguna extends Model
     protected $fillable = [
         'nama_pengguna',
         'username',
+        'email',
         'password',
         'jabatan',
     ];

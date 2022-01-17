@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('title', 'Memulai Sesi')
+@section('title', 'Reset Password')
 
 @section('content')
 <section class="section">
@@ -14,29 +14,25 @@
                 @include('partials.message')
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h4>Memulai Sesi</h4>
+                        <h4>Reset Password</h4>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('login') }}">
-                            @method('post')
+                        <form method="post" action="{{ route('reset-password.send') }}">
                             @csrf
                             <div class="form-group">
-                                <label for="username">Username</label>
-                                <input type="text" class="form-control" name="username" autofocus>
-                            </div>
-                            <div class="form-group">
-                                <label for="password" class="control-label">Password</label>
-                                <input type="password" class="form-control" name="password">
-                                <div class="text-right mt-2">
-                                    <small><a href="{{ route('reset-password') }}">Lupa password?</a></small>
-                                </div>
+                                <label for="username">Email atau Username</label>
+                                <input type="text" class="form-control" name="email">
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn-lg btn-block">
-                                    Login
+                                    <i class="fa fa-paper-plane mr-2"></i>Kirim
                                 </button>
                             </div>
                         </form>
+                        <hr>
+                        <div class="text-center">
+                            <a href="{{ route('auth') }}">Memulai sesi</a>
+                        </div>
                     </div>
                 </div>
                 <div class="simple-footer">

@@ -11,14 +11,16 @@ class ResetPasswordMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $body;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($body)
     {
-        //
+        $this->body = $body;
     }
 
     /**
@@ -28,6 +30,6 @@ class ResetPasswordMail extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->subject('Reset password')->view('emails.default');
     }
 }

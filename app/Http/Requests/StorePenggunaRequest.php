@@ -26,7 +26,8 @@ class StorePenggunaRequest extends FormRequest
     {
         return [
             'nama_pengguna' => 'required|string|max:100',
-            'username' => 'required|string|max:15|unique:pengguna',
+            'username' => 'required|string|alpha_num|max:15|unique:pengguna',
+            'email' => 'required|string|email:rfc|unique:pengguna',
             'password' => 'required|string|min:6|confirmed',
             'jabatan' => 'required|in:pemilik,kasir',
         ];

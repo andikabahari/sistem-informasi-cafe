@@ -11,6 +11,7 @@ use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\StrukController;
+use App\Http\Controllers\ResetPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,11 @@ use App\Http\Controllers\StrukController;
 Route::get('/', AuthController::class)->name('auth');
 
 Route::post('/login', LoginController::class)->name('login');
+
+Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('reset-password');
+Route::post('/reset-password', [ResetPasswordController::class, 'send'])->name('reset-password.send');
+// Route::get('/reset-password/new', [ResetPasswordController::class, 'newPassword'])->name('reset-password.new');
+// Route::post('/reset-password/new', [ResetPasswordController::class, 'store'])->name('reset-password.store');
 
 Route::get('/logout', LogoutController::class)->name('logout');
 

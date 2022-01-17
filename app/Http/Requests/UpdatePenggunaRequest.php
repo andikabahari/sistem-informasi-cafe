@@ -29,7 +29,14 @@ class UpdatePenggunaRequest extends FormRequest
             'username' => [
                 'required',
                 'string',
+                'alpha_num',
                 'max:15',
+                Rule::unique('pengguna')->ignore($this->id, 'id_pengguna'),
+            ],
+            'email' => [
+                'required',
+                'string',
+                'email:rfc',
                 Rule::unique('pengguna')->ignore($this->id, 'id_pengguna'),
             ],
             'password' => 'required|string|min:6|confirmed',

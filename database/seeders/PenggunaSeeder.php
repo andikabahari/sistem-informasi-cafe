@@ -18,6 +18,7 @@ class PenggunaSeeder extends Seeder
         Pengguna::create([
             'nama_pengguna' => 'Bapak Pemilik',
             'username' => 'pemilik',
+            'email' => 'pemilik@example.com',
             'password' => MyAuth::hash('default'),
             'jabatan' => 'pemilik',
         ]);
@@ -25,6 +26,7 @@ class PenggunaSeeder extends Seeder
         Pengguna::create([
             'nama_pengguna' => 'Ibu Kasir',
             'username' => 'kasir',
+            'email' => 'kasir@example.com',
             'password' => MyAuth::hash('default'),
             'jabatan' => 'kasir',
         ]);

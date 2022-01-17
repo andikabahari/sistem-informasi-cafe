@@ -23,6 +23,7 @@
                             <th>#</th>
                             <th>Nama Pengguna</th>
                             <th>Username</th>
+                            <th>Email</th>
                             <th>Jabatan</th>
                             <th>Aksi</th>
                         </thead>
@@ -35,6 +36,7 @@
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $data->nama_pengguna }}</td>
                                     <td>{{ $data->username }}</td>
+                                    <td>{{ $data->email }}</td>
                                     <td>{{ $data->jabatan }}</td>
                                     <td>
                                         <a href="{{ route('pengguna.edit', $data->id_pengguna) }}" class="btn btn-success">Edit</a>

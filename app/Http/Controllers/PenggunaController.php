@@ -51,6 +51,7 @@ class PenggunaController extends Controller
         Pengguna::create([
             'nama_pengguna' => $validated['nama_pengguna'],
             'username' => $validated['username'],
+            'email' => $validated['email'],
             'password' => MyAuth::hash($validated['password']),
             'jabatan' => $validated['jabatan'],
         ]);
@@ -92,6 +93,7 @@ class PenggunaController extends Controller
         Pengguna::where('id_pengguna', $id)->update([
             'nama_pengguna' => $validated['nama_pengguna'],
             'username' => $validated['username'],
+            'email' => $validated['email'],
             'password' => MyAuth::hash($validated['password']),
             'jabatan' => $validated['jabatan'],
         ]);

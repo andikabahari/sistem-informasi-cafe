@@ -27,11 +27,18 @@ class UpdateAkunRequest extends FormRequest
     {
         return [
             'nama_pengguna' => 'required|string|max:100',
+            'email' => [
+                'required',
+                'string',
+                'email:rfc',
+                Rule::unique('pengguna')->ignore($this->id, 'id_pengguna'),
+            ],
             'username' => [
                 'required',
                 'string',
+                'alpha_num',
                 'max:15',
-                Rule::unique('pengguna')->ignore(MyAuth::id(), 'id_pengguna'),
+                Rule::unique('pengguna')->ignore($this->id, 'id_pengguna'),
             ],
             'password' => 'required|string|min:6|confirmed',
         ];
