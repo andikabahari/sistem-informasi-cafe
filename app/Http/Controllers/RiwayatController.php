@@ -20,6 +20,7 @@ class RiwayatController extends Controller
 
         $pesanan = DB::table('pembayaran')
                 ->join('pesanan', 'pembayaran.id_pesanan', '=', 'pesanan.id_pesanan')
+                ->orderBy('pesanan.id_pesanan', 'desc')
                 ->paginate(9);
 
         return view('pages.riwayat.index', compact('pesanan')); 
