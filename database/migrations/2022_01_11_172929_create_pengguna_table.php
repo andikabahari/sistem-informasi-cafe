@@ -17,6 +17,7 @@ class CreatePenggunaTable extends Migration
             $table->increments('id_pengguna');
             $table->string('nama_pengguna');
             $table->string('username')->unique();
+            $table->string('email')->unique();
             $table->string('password');
             $table->enum('jabatan', ['pemilik', 'kasir']);
         });
