@@ -73,8 +73,8 @@
                                                 <input type="hidden" name="harga[]" value="{{ $data->price }}">
                                             </td>
                                             <td>
-                                                Rp<span class="jumlah">0</span>
-                                                <input type="hidden" name="jumlah[]" value="0" readonly>
+                                                Rp<span class="jumlah">{{ $data->quantity * $data->price }}</span>
+                                                <input type="hidden" name="jumlah[]" value="{{ $data->quantity }}" readonly>
                                             </td>
                                             <td width="100">
                                                 <a href="{{ route('pesanan.cart.remove', $data->id ) }}" class="remove-cart btn btn-danger">
@@ -151,24 +151,40 @@
         var tmpJumlah = 0;
         var tmpTotal = 0;
 
-        for (var i = 0; i < banyak.length; i++) {
-            if (isNaN(banyak[i].value))
-                banyak[i].value = 0;
-            tmpJumlah = parseFloat(banyak[i].value) * parseFloat(harga[i].value);
-            jumlah[i].value = tmpJumlah;
-            document.getElementsByClassName("jumlah")[i].innerHTML = jumlah[i].value;
+        if (banyak.length) {
+            for (var i = 0; i < banyak.length; i++) {
+                if (isNaN(banyak[i].value)) {
+                    banyak[i].value = 0;
+                }
+                tmpJumlah = parseFloat(banyak[i].value) * parseFloat(harga[i].value);
+                jumlah[i].value = tmpJumlah;
+                document.getElementsByClassName("jumlah")[i].innerHTML = jumlah[i].value;
+            }
+        } else {
+            if (isNaN(banyak.value)) {
+                banyak.value = 0;
+            }
+            tmpJumlah = parseFloat(banyak.value) * parseFloat(harga.value);
+            jumlah.value = tmpJumlah;
+            document.getElementsByClassName("jumlah")[0].innerHTML = jumlah.value;
         }
 
-        for (var i = 0; i < jumlah.length; i++)
-            tmpTotal += parseFloat(jumlah[i].value);
+        if (jumlah.length) {
+            for (var i = 0; i < jumlah.length; i++) {
+                tmpTotal += parseFloat(jumlah[i].value);
+            }
+        } else {
+            tmpTotal += parseFloat(jumlah.value);
+        }
         
         total.value = tmpTotal;
         document.getElementById("total").innerHTML = total.value;
 
-        if (parseFloat(tunai.value) > 0)
+        if (parseFloat(tunai.value) > 0) {
             kembali.value = parseFloat(tunai.value) - parseFloat(total.value);
-        else
+        } else {
             kembali.value = 0;
+        }
         document.getElementById("kembali").innerHTML = kembali.value;
     }
 </script>
