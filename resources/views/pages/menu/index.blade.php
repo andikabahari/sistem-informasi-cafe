@@ -61,6 +61,9 @@
                         </tbody>
                     </table>
                 </div>
+                <div>
+                    {{ $menu->links() }}
+                </div>
             </div>
         </div>
     </div>

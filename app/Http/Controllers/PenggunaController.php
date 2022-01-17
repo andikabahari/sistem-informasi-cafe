@@ -19,7 +19,7 @@ class PenggunaController extends Controller
     {
         MyAuth::authorize('pemilik');
 
-        $pengguna = Pengguna::all();
+        $pengguna = Pengguna::orderBy('id_pengguna', 'desc')->paginate(5);
 
         return view('pages.pengguna.index',compact('pengguna'));
     }

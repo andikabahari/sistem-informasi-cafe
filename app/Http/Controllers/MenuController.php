@@ -22,7 +22,7 @@ class MenuController extends Controller
     {
         MyAuth::authorize('pemilik');
 
-        $menu = Menu::all();
+        $menu = Menu::orderBy('id_menu', 'desc')->paginate(5);
 
         return view('pages.menu.index', compact('menu'));
     }
