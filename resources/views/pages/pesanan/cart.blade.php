@@ -74,7 +74,7 @@
                                             </td>
                                             <td>
                                                 Rp<span class="jumlah">{{ $data->quantity * $data->price }}</span>
-                                                <input type="hidden" name="jumlah[]" value="{{ $data->quantity }}" readonly>
+                                                <input type="hidden" name="jumlah[]" value="{{ $data->quantity * $data->price }}" readonly>
                                             </td>
                                             <td width="100">
                                                 <a href="{{ route('pesanan.cart.remove', $data->id ) }}" class="remove-cart btn btn-danger">
