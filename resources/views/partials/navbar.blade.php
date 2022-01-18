@@ -21,7 +21,7 @@
                         <a href="{{ route('akun') }}" class="dropdown-item has-icon">
                             <i class="far fa-user"></i> Akun
                         </a>
-                        <a href="{{ route('logout') }}" class="dropdown-item has-icon">
+                        <a href="{{ route('logout') }}" class="dropdown-item has-icon" onclick="return confirm('Anda yakin ingin keluar?')">
                             <i class="fas fa-sign-out-alt"></i> Keluar
                         </a>
                     </div>

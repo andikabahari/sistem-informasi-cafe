@@ -115,8 +115,6 @@ class PenggunaController extends Controller
 
         Pengguna::findOrFail($id)->delete();
 
-        // $request->session()->flash('success_message', 'Pengguna berhasil dihapus!');
-
         return redirect()->route('pengguna');
     }
 }

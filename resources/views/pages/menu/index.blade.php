@@ -48,7 +48,7 @@
                                         <div style="width: 125px">
                                             <a href="{{ route('menu.edit', $data->id_menu) }}" class="btn btn-success">Edit</a>
                                             @if (DB::table('detail_pesanan')->where('id_menu', $data->id_menu)->doesntExist())
-                                                <form class="d-inline-block" action="{{ route('menu.delete', $data->id_menu) }}" method="post">
+                                                <form class="d-inline-block" action="{{ route('menu.delete', $data->id_menu) }}" method="post" onsubmit="return confirm('Anda yakin ingin menghapus data tersebut?')">
                                                     @method('DELETE')
                                                     @csrf
                                                     <button class="btn btn-danger" type="submit">Hapus</a>

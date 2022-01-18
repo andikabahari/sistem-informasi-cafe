@@ -40,7 +40,7 @@
                                     <td>{{ $data->jabatan }}</td>
                                     <td>
                                         <a href="{{ route('pengguna.edit', $data->id_pengguna) }}" class="btn btn-success">Edit</a>
-                                        <form class="d-inline-block" action="{{ route('pengguna.delete', $data->id_pengguna) }}" method="post">
+                                        <form class="d-inline-block" action="{{ route('pengguna.delete', $data->id_pengguna) }}" method="post" onsubmit="return confirm('Anda yakin ingin menghapus data tersebut?')">
                                             @method('DELETE')
                                             @csrf
                                             <button class="btn btn-danger" type="submit">Hapus</a>

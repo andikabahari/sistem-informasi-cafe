@@ -125,8 +125,6 @@ class MenuController extends Controller
             $menu->delete();
         }
 
-        // $request->session()->flash('success_message', 'Menu berhasil dihapus!');
-
         return redirect()->route('menu');
     }
 }

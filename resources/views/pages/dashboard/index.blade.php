@@ -107,7 +107,7 @@
 @endsection
 
 @section('style')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <link rel="stylesheet" href="{{ asset('plugins/jqueryui/jquery-ui-1.12.1.min.css') }}">
     <style>
         .ui-datepicker-calendar {
             display: none;
@@ -116,8 +116,8 @@
 @endsection
 
 @section('script')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+<script src="{{ asset('plugins/jqueryui/jquery-ui-1.12.1.min.js') }}"></script>
+<script src="{{ asset('plugins/chartjs/chart-3.7.0.min.js') }}"></script>
 <script>
     const ctx = document.getElementById('myChart').getContext('2d');
     const myChart = new Chart(ctx, {

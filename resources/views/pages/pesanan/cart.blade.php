@@ -11,7 +11,7 @@
             <div class="card-header">
                 <h4>@yield('title')</h4>
             </div>
-            <form action="{{ route('pesanan') }}" method="post">
+            <form action="{{ route('pesanan') }}" method="post" onsubmit="return confirm('Konfirmasi pembayaran?')">
                 @csrf
                 <input type="hidden" name="id_pengguna" value="{{ \App\Helpers\MyAuth::id() }}">
                 <div class="card-body">
