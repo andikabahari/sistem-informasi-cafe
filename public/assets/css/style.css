@@ -1,22 +1,12 @@
 @charset "UTF-8";
 
+@import url('//fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
+/* @import url("//fonts.googleapis.com/css?family=Nunito:400,600,700,800"); */
+
 .dropdown-toggle::after {
     display: none;
 }
 
-/**
- * Stisla
- *
- * Stisla is a clean & modern HTML5 admin template based on Bootstrap 4.
- * Stisla will make it easier for you to create your own admin interface.
- *
- * @package	Stisla
- * @version	2.3.0
- * @author 	Muhamad Nauval Azhar
- * @url 	https://getstisla.com
- *
- */
- 
 /**
  * TABLE OF CONTENTS
  *
@@ -59,7 +49,6 @@
 /* 2. Mixin */
 /* 3. Bootstrap Override */
 /* 3.1 Misc */
-@import url("//fonts.googleapis.com/css?family=Nunito:400,600,700,800");
 .btn:focus,
 .btn:active,
 .btn:active:focus,
@@ -1711,7 +1700,7 @@ h6 .badge {
   .navbar .form-inline .search-backdrop {
     display: none; }
   .navbar .nav-link.nav-link-lg div {
-    display: none; } }
+    display: block; } }
 
 @media (min-width: 576px) and (max-width: 767.98px) {
   .navbar .form-inline .search-element {

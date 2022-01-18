@@ -18,13 +18,23 @@ class PesananController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         MyAuth::authorize('kasir');
 
-        $menu = Menu::where('aktif', true)->get();
+        $cartCount = \Cart::getContent()->count();
+        $query = $request->input('q');
+        if ($query) {
+            $search = '%'.$query.'%';
+            $menu = Menu::where('aktif', true)
+                    ->where('nama_menu', 'like', $search)
+                    ->orWhere('harga', 'like', $search)
+                    ->paginate(8);
+        } else {
+            $menu = Menu::where('aktif', true)->paginate(8);
+        }
 
-        return view('pages.pesanan.index', compact('menu'));
+        return view('pages.pesanan.index', compact('menu', 'cartCount'));
     }
 
     /**

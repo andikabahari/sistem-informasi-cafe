@@ -5,16 +5,25 @@
 @section('content')
 <section class="section">
     <div class="section-body">
-        <div class="row mb-2" style="margin-top: 30px">
-            <div class="col">
+        <div class="row mb-4" style="margin-top: 30px">
+            <div class="col-md-8">
                 <h2 class="section-title float-left" style="margin-top: 0px">Pesanan</h2>
-                <a class="float-right" href="{{ route('pesanan.cart') }}"><i class="fa fa-shopping-cart mr-2"></i>Lihat keranjang</a>
+            </div>
+            <div class="col-md-4">
+                <form action="{{ route('pesanan') }}" method="get">
+                    <div class="input-group mt-3 mt-md-0">
+                        <input type="text" class="form-control" name="q" value="{{ old('q') }}">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary">Cari</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
         @include('partials.message')
         <div class="row">
             @foreach($menu as $data)
-                <div class="col-sm-3">
+                <div class="col-sm-4 col-md-3">
                     <div class="card">
                         @if ($data->gambar)
                             <img class="card-img-top" src="{{ asset('storage/'.$data->gambar) }}" alt="{{ $data->nama_menu }}" style="width: 100%; max-height: 200px">
@@ -40,6 +49,14 @@
                 </div>
             @endforeach
         </div>
+        <div>
+            {{ $menu->links() }}
+        </div>
     </div>
 </section>
+<div class="fixed-bottom" style="left: auto">
+    <a class="btn btn-primary m-4" href="{{ route('pesanan.cart') }}">
+        <i class="fa fa-shopping-cart mr-2"></i>Lihat keranjang<span class="badge badge-light">{{ $cartCount }}</span>
+    </a>
+</div>
 @endsection
