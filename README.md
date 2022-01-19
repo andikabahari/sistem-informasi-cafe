@@ -4,6 +4,32 @@
 
 Ikuti langkah berikut ini untuk melakukan instalasi aplikasi.
 
+### Mengunduh repository
+
+Jika anda sudah menginstal git, jalankan perintah berikut.
+
+Catatan: Perbedaan branch `main` dengan branch `tugas` terdapat pada fitur upload. Branch `main` menggunakan symlink (symbolic link) terhadap folder storage dan folder public, maka file yang diupload akan masuk ke dalam folder storage. Sedangkan, branch `tugas` tidak menggunakan symlink, maka file yang diupload akan langsung masuk ke dalam folder public.
+
+#### Branch `main`
+
+```
+git clone https://github.com/andikabahari/sistem-informasi-cafe.git
+```
+
+#### Branch `tugas`
+
+```
+git clone -b tugas https://github.com/andikabahari/sistem-informasi-cafe.git
+```
+
+### Menginstal dependencies
+
+Jalankan perintah berikut untuk menginstal dependencies.
+
+```
+composer install
+```
+
 ### Membuat database
 
 Silakan buat database baru untuk aplikasi anda.
