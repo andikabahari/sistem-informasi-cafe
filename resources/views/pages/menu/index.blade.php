@@ -36,7 +36,7 @@
                                     <td>{{ $no++ }}</td>
                                     <td>
                                         @if ($data->gambar)
-                                            <img class="m-2" src="{{ asset('storage/'.$data->gambar) }}" alt="{{ $data->nama_menu }}" style="width: 100px; height: 100px">
+                                            <img class="m-2" src="{{ asset($data->gambar) }}" alt="{{ $data->nama_menu }}" style="width: 100px; height: 100px">
                                         @else
                                             <img class="m-2" src="holder.js/100x100/?text=Gambar">
                                         @endif

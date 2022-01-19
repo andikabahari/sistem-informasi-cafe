@@ -58,7 +58,7 @@
                                 </span>
                             @enderror
                             @if ($menu->gambar)
-                                <img id="gambar" class="mt-3" src="{{ asset('storage/'.$menu->gambar) }}" alt="{{ $menu->nama_menu }}" style="width: 200px; height: 200px">
+                                <img id="gambar" class="mt-3" src="{{ asset($menu->gambar) }}" alt="{{ $menu->nama_menu }}" style="width: 200px; height: 200px">
                             @else
                                 <img id="gambar" class="mt-3" src="holder.js/200x200">
                             @endif

@@ -26,7 +26,7 @@
                 <div class="col-sm-4 col-md-3">
                     <div class="card">
                         @if ($data->gambar)
-                            <img class="card-img-top" src="{{ asset('storage/'.$data->gambar) }}" alt="{{ $data->nama_menu }}" style="width: 100%; max-height: 200px">
+                            <img class="card-img-top" src="{{ asset($data->gambar) }}" alt="{{ $data->nama_menu }}" style="width: 100%; max-height: 200px">
                         @else
                             <img class="card-img-top" src="holder.js/150x150/?text=Gambar&auto=yes" style="width: 100%; max-height: 200px">
                         @endif

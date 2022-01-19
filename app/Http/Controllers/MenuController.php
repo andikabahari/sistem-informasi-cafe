@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use App\Http\Requests\StoreMenuRequest;
 use App\Http\Requests\UpdateMenuRequest;
 use App\Models\Menu;
@@ -51,8 +53,15 @@ class MenuController extends Controller
 
         $validated = $request->validated();
 
-        if ($request->file('gambar')) {
-            $validated['gambar'] = $request->file('gambar')->store('uploads');
+        $file = $request->file('gambar');
+
+        if ($file) {
+            $folder = 'uploads';
+            $name = sprintf('%s.%s', Str::random(32), $file->getClientOriginalExtension());
+            
+            $file->move($folder, $name);
+
+            $validated['gambar'] = sprintf('%s/%s', $folder, $name);
         }
 
         Menu::create($validated);
@@ -90,12 +99,19 @@ class MenuController extends Controller
         
         $validated = $request->validated();
 
-        if ($request->file('gambar')) {
+        $file = $request->file('gambar');
+
+        if ($file) {
             if ($request->input('old_gambar')) {
-                Storage::delete($request->input('old_gambar'));
+                File::delete($request->input('old_gambar'));
             }
+
+            $folder = 'uploads';
+            $name = sprintf('%s.%s', Str::random(32), $file->getClientOriginalExtension());
             
-            $validated['gambar'] = $request->file('gambar')->store('uploads');
+            $file->move($folder, $name);
+
+            $validated['gambar'] = sprintf('%s/%s', $folder, $name);
         }
 
         Menu::where('id_menu', $id)->update($validated);
@@ -119,7 +135,7 @@ class MenuController extends Controller
             $menu = Menu::findOrFail($id);
 
             if ($menu->gambar) {
-                Storage::delete($menu->gambar);
+                File::delete($menu->gambar);
             }
 
             $menu->delete();

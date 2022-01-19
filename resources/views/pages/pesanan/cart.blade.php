@@ -57,7 +57,7 @@
                                             <td>
                                                 <div class="card my-3" style="width: 100px;">
                                                     @if ($data->attributes->image)
-                                                        <img class="card-img-top" src="{{ asset('storage/'.$data->attributes->image) }}" alt="{{ $data->name }}" style="width: 100px; height: 100px">
+                                                        <img class="card-img-top" src="{{ asset($data->attributes->image) }}" alt="{{ $data->name }}" style="width: 100px; height: 100px">
                                                     @else
                                                         <img class="card-img-top" src="holder.js/100x100/?text=Gambar">
                                                     @endif
