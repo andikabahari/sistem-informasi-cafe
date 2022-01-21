@@ -172,6 +172,6 @@ class PesananController extends Controller
 
         $request->session()->flash('success_message', 'Pesanan berhasil disimpan!');
 
-        return redirect()->route('pesanan');
+        return redirect()->route('struk', $pesanan->id_pesanan);
     }
 }
