@@ -12,6 +12,7 @@ use App\Http\Controllers\AkunController;
 use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\StrukController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\LaporanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,9 @@ Route::get('/logout', LogoutController::class)->name('logout');
 Route::middleware('myauth')->group(function ()
 {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
+    
+    Route::get('/laporan/pesanan', [LaporanController::class, 'pesanan'])->name('laporan.pesanan');
+    Route::get('/laporan/pendapatan', [LaporanController::class, 'pendapatan'])->name('laporan.pendapatan');
 
     Route::get('/pesanan', [PesananController::class, 'index'])->name('pesanan');
     Route::get('/pesanan/create', [PesananController::class, 'create'])->name('pesanan.create');

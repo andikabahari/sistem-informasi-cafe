@@ -5,7 +5,9 @@
 @section('content')
 <section class="section">
     <div class="section-body">
-        @include('partials.message')
+        <div class="mx-auto" style="max-width: 480px">
+            @include('partials.message')
+        </div>
         <div class="card mx-auto mt-5" style="max-width: 480px">
             <form action="{{ route('pesanan') }}" method="post">
                 <div id="print">
