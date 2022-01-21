@@ -27,8 +27,8 @@
         @if ($jumlahPesanan > 0)
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-12">
-                    <div class="card card-statistic-1">
-                        <div class="card-icon bg-primary">
+                    <div class="card card-statistic-2">
+                        <div class="card-icon shadow-primary bg-primary">
                             <i class="fas fa-coffee"></i>
                         </div>
                         <div class="card-wrap">
@@ -37,11 +37,17 @@
                             </div>
                             <div class="card-body">{{ $jumlahMenu }}</div>
                         </div>
+                        <div class="card-stats">
+                            <div class="card-stats-title pt-0 text-center">
+                                <hr class="mt-0">
+                                <a class="font-weight-600" href="{{ route('menu') }}">Daftar menu</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-12">
-                    <div class="card card-statistic-1">
-                        <div class="card-icon bg-danger">
+                    <div class="card card-statistic-2">
+                        <div class="card-icon shadow-primary bg-danger">
                             <i class="fas fa-shopping-cart"></i>
                         </div>
                         <div class="card-wrap">
@@ -50,11 +56,17 @@
                             </div>
                             <div class="card-body">{{ $jumlahPesanan }}</div>
                         </div>
+                        <div class="card-stats">
+                            <div class="card-stats-title pt-0 text-center">
+                                <hr class="mt-0">
+                                <a class="font-weight-600" href="{{ route('laporan.pesanan', compact('periode')) }}" target="_blank">Cetak laporan</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-12">
-                    <div class="card card-statistic-1">
-                        <div class="card-icon bg-warning">
+                    <div class="card card-statistic-2">
+                        <div class="card-icon shadow-primary bg-warning">
                             <i class="fas fa-suitcase"></i>
                         </div>
                         <div class="card-wrap">
@@ -62,6 +74,12 @@
                                 <h4>Total Pendapatan</h4>
                             </div>
                             <div class="card-body">Rp{{ $totalPendapatan }}</div>
+                        </div>
+                        <div class="card-stats">
+                            <div class="card-stats-title pt-0 text-center">
+                                <hr class="mt-0">
+                                <a class="font-weight-600" href="{{ route('laporan.pendapatan', compact('periode')) }}" target="_blank">Cetak laporan</a>
+                            </div>
                         </div>
                     </div>
                 </div>
