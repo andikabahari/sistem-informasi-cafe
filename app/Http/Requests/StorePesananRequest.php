@@ -29,7 +29,7 @@ class StorePesananRequest extends FormRequest
             'tanggal_pesanan' => 'required|date',
             'banyak' => 'required|array',
             'banyak.*' => 'nullable|integer',
-            'total' => 'required|numeric',
+            'total' => 'required|numeric|gt:0',
             'tunai' => 'required|numeric|gte:total',
             'kembali' => 'required|numeric',
         ];
