@@ -111,7 +111,7 @@
                                 @foreach ($tabelPendapatan as $data)
                                     <tr>
                                         <td>{{ $data->periode }}</td>
-                                        <td>Pekan ke-{{ $data->pekan }}</td>
+                                        <td>Ke-{{ $data->pekan }}</td>
                                         <td>{{ $data->pesanan }}</td>
                                         <td>Rp{{ $data->pendapatan }}</td>
                                     </tr>
